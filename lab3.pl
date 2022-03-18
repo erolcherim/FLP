@@ -57,6 +57,7 @@ path(X,Y) :- connected(X,Y).
 path(X,Y,_) :- connected(X,Z), path(Z,Y).
 path(X,Y,L) :- connected(X,Z), not(member(Z,L)), path(Z,Y,[X,Z|L]).
 
+
 successor(Number,[x|Number]).
 
 plus(X,Y,Result):- append(X,Y,Result).
@@ -65,6 +66,37 @@ times([],_,[]).
 times([x|Number1], Number2, Result):-
     times(Number1,Number2,Result2),
     append(Result2,Number2,Result).
+
+con([X|L],R):-con([X|L],R,X).
+con([],[X],X).
+con([X|L1],[X|List2],X):-con(L1,List2,X).
+
+element_at([Head|_],1,Head).
+element_at([_|List],Index,Result):-
+    NewIndex is Index - 1,
+    element_at(List,NewIndex,Result).
+
+animal(alligator).
+animal(tortue).
+animal(caribou).
+animal(ours).
+animal(cheval).
+animal(vache).
+animal(lapin).
+
+mutation(X):- animal(Y),animal(Z),Y\==Z,
+    		  name(Y,Ny), name(Z,Nz),
+    		  append(Y1,Y2,Ny), Y1\==[],
+    		  append(Y2, _, Nz), Y2\==[],
+    		  append(Y1,Nz,LX),name(X,LX).
+
+
+
+
+
+
+
+
 
 
 
