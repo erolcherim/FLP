@@ -57,7 +57,14 @@ path(X,Y) :- connected(X,Y).
 path(X,Y,_) :- connected(X,Z), path(Z,Y).
 path(X,Y,L) :- connected(X,Z), not(member(Z,L)), path(Z,Y,[X,Z|L]).
 
+successor(Number,[x|Number]).
+
 plus(X,Y,Result):- append(X,Y,Result).
+
+times([],_,[]).
+times([x|Number1], Number2, Result):-
+    times(Number1,Number2,Result2),
+    append(Result2,Number2,Result).
 
 
 
