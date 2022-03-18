@@ -27,6 +27,42 @@ older(P,P2):-
     born(P,date(Dp,Mp,Yp)),
 	born(P2,date(D2,M2,Y2)),
     before(date(Dp,Mp,Yp),date(D2,M2,Y2)).
+    
+ 
+ %---------------------------------------------------------------------------
+ 
+ % Maze
+
+connected(1,2).
+connected(3,4).
+connected(5,6).
+connected(7,8).
+connected(9,10).
+connected(12,13).
+connected(13,14).
+connected(15,16).
+connected(17,18).
+connected(19,20).
+connected(4,1).
+connected(6,3).
+connected(4,7).
+connected(6,11).
+connected(14,9).
+connected(11,15).
+connected(16,12).
+connected(14,17).
+connected(16,19).
+
+path(X,Y) :- connected(X,Y).
+path(X,Y,_) :- connected(X,Z), path(Z,Y).
+path(X,Y,L) :- connected(X,Z), not(member(Z,L)), path(Z,Y,[X,Z|L]).
+
+plus(X,Y,Result):- append(X,Y,Result).
+
+
+
+
+
         
     
     
